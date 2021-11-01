@@ -146,7 +146,8 @@ test('fortitive assimilation', () => {
 		['market--de', 'markette'],
 		['kasap--den', 'kasaptan'],
 		["Zonguldak'--de", "Zonguldak'ta"],
-		["Ahmet --de geldi", "Ahmet de geldi"]
+		["Ahmet --de geldi", "Ahmet de geldi"],
+		["1960'--den", "1960'tan"]
 	];
 
 	for(let [source, target] of list) {
