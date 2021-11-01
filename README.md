@@ -65,7 +65,7 @@ result = inflect("kitap", "ler");	// kitaplar
 ## 2. Metin Çekimleme
 `inflect(text)` fonksiyonuna sadece bir metin parametresi vererek tek sözcük yerine bir veya daha fazla çekimlenecek sözcük içeren uzun metinleri çekimleyebilirsiniz. Bu durumda çekim ekinin ekleneceği yerler `--EK` formatıyla işaretlenmelidir. `EK` olarak **Kullanım** başlığı altında listelenen eklerden istediklerinizi kullanabilirsiniz.
 
-Uygulamanızda metin şablonlarının içine sözcükler bir başka kütüphane veya fonksiyon tarafından ekleniyorsa bu yöntemi ilgili kütüphaneden sonra çekimlemeleri yapmak için kullanabilirsiniz.
+Uygulamanızda metin şablonlarının içine sözcükler bir başka kütüphane veya fonksiyon tarafından ekleniyorsa (örneğin bir çeviri/i18n kütüphanesi gibi) bu yöntemi ilgili kütüphaneden sonra çekimlemeleri yapmak için kullanabilirsiniz.
 
 Örnekler:
 
@@ -137,5 +137,5 @@ inflect("{{year}}'--den önce doğanlar", {year : 1960});
 
 ````js
 // FENERBAHÇE'NİN MAÇLARI
-inflect("{{team}}--İN MAÇLARI", {team : "FENERBAHÇE"});
+inflect("{{team}}'--İN MAÇLARI", {team : "FENERBAHÇE"});
 ````
