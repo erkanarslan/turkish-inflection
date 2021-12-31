@@ -1,4 +1,4 @@
-[Click here](readme-en.md) for English documentation.
+[Click here](./readme-en.md) for English documentation.
 
 # Türkçe Sözcük Çekimleme Kütüphanesi
 Bu Javascript kütüphanesi Türkçe sözcüklerin ve çekim eklerinin doğru bir şekilde çekimlenmesini sağlar.
