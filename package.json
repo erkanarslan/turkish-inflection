@@ -1,10 +1,12 @@
 {
   "name": "@erkanarslan/turkish-inflection",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A library to inflect Turkish words",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "tsc"
   },
   "keywords": [
     "Turkish",
