@@ -1,6 +1,10 @@
 {
   "name": "@erkanarslan/turkish-inflection",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erkanarslan/turkish-inflection"
+  },
   "description": "A library to inflect Turkish words",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
