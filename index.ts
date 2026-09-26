@@ -18,7 +18,7 @@ const lenitionMap : Dict = {
 const alternatives = suffixes.map(s => s.replace('e', 'a').replace('i', 'ı'))
 	.concat(['İN', 'İ', 'Mİ']) as unknown as typeof suffixes;
 
-const markupPattern = new RegExp("--(" + suffixes.concat(alternatives).join("|") + ")", 'i');
+const markupPattern = new RegExp("--(\\+?)(" + suffixes.concat(alternatives).join("|") + ")", 'i');
 const vowelPattern = new RegExp(vowels.join("|"), 'gi');
 const wordPattern = /(?:[a-z]|[A-Z]|ç|Ç|ğ|Ğ|ı|İ|ö|Ö|ş|Ş|ü|Ü)+/;
 const numberPattern = /\d+/;
@@ -53,16 +53,19 @@ export function inflectText(text : string, interpolation? : Dict) : string {
 		if(!match) break;
 		if(!match.index) continue;
 
-		let index = match.index, suffix = match[1];
+		let index = match.index;
+		const possessive = match[1] === '+';
+		let suffix = match[2];
 		let [firstPart, word] = splitLastWord(text.slice(0, index));
 
-		text = firstPart + inflectWord(word, suffix) + text.slice(index + suffix.length + 2);
+		const markerLength = 2 + (possessive ? 1 : 0) + suffix.length;
+		text = firstPart + inflectWord(word, suffix, possessive) + text.slice(index + markerLength);
 	}
 
 	return text;
 }
 
-export function inflectWord(word : string, suffix : string) : string {
+export function inflectWord(word : string, suffix : string, possessive = false) : string {
 	const upperCase = isUpperCase(suffix);
 	const normalizedSuffix = normalizeSuffix(suffix);
 	const normalizedWord = normalizeWord(word);
@@ -75,7 +78,7 @@ export function inflectWord(word : string, suffix : string) : string {
 
 	// Fortitive assimilation (Ex: market + de -> markette)
 	suffix = applyFortitiveAssimilation(normalizedWord, suffix);
-	suffix = addBufferLetter(normalizedWord, suffix, normalizedSuffix);
+	suffix = addBufferLetter(normalizedWord, suffix, normalizedSuffix, possessive);
 
 	// Transform word
 	// Consonant lenition (Ex: bıçak + ı -> bıçağı)
@@ -155,13 +158,18 @@ function applyLenition(word : string, suffix : string) : string {
  * @param suffix
  * @returns Transformed suffix
  */
-function addBufferLetter(word : string, suffix : string, normalizedSuffix : string) : string {
+function addBufferLetter(word : string, suffix : string, normalizedSuffix : string, possessive = false) : string {
 	const _vowels = vowels as unknown as string[]
-	if(startsWithVowel(normalizedSuffix) && wordEndsWith(_vowels, word)) {
-		if(normalizedSuffix == 'i' || normalizedSuffix == 'e') {
-			return 'y' + suffix;
+	if(wordEndsWith(_vowels, word)) {
+		if(startsWithVowel(normalizedSuffix)) {
+			if(normalizedSuffix == 'i' || normalizedSuffix == 'e') {
+				return (possessive ? 'n' : 'y') + suffix;
+			}
+			else {
+				return 'n' + suffix;
+			}
 		}
-		else {
+		else if(possessive && (normalizedSuffix == 'de' || normalizedSuffix == 'den')) {
 			return 'n' + suffix;
 		}
 	}

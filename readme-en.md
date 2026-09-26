@@ -87,6 +87,17 @@ result = inflect("Antalya'--e --mi gitmek istiyorsun?");
 
 ````
 
+### Third-person singular possessive (`--+`)
+When the word already carries a third-person singular possessive suffix (`-sı`, `-si`, etc.) and the next suffix starts with a vowel, the buffer letter is `n` instead of `y`. The same `n` buffer is used for `de` and `den`. Mark this by placing `+` immediately after `--`:
+
+````js
+inflect("Giriş Kapısı--+e");   // Giriş Kapısına
+inflect("Giriş Kapısı--+de");  // Giriş Kapısında
+inflect("Giriş Kapısı--+den"); // Giriş Kapısından
+inflect("Giriş Kapısı--+i");   // Giriş Kapısını
+inflect("Giriş Kapısı--+i--ler"); // Giriş Kapısınılar
+````
+
 ## 3. Interpolation and Inflextion
 You can have the parts marked with `{{VALUE_NAME}}` inside the text templates to be filled (interpolated) and then inflected. For this, you can call the `inflect(text, object)` function by giving the first parameter a text and the second parameter an object containing values. Examples:
 

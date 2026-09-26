@@ -89,6 +89,17 @@ result = inflect("Antalya'--e --mi gitmek istiyorsun?");
 
 ````
 
+### Üçüncü tekil iyelik (`--+`)
+Sözcük zaten üçüncü tekil iyelik eki taşıyorsa (`-sı`, `-si` vb.) ve sonraki ek ünlüyle başlıyorsa, ara harf olarak `y` yerine `n` kullanılır. `de` ve `den` eklerinde de aynı `n` ara harfi eklenir. Bunu `--` işaretinden hemen sonra `+` koyarak belirtin:
+
+````js
+inflect("Giriş Kapısı--+e");   // Giriş Kapısına
+inflect("Giriş Kapısı--+de");  // Giriş Kapısında
+inflect("Giriş Kapısı--+den"); // Giriş Kapısından
+inflect("Giriş Kapısı--+i");   // Giriş Kapısını
+inflect("Giriş Kapısı--+i--ler"); // Giriş Kapısınılar
+````
+
 ## 3. İnterpolasyon ve Çekimleme
 Metin şablonlarının içinde `{{DEĞER_ADI}}` ile işaretlenen kısımların doldurulmasını (interpolasyon) ve ardından çekimlenmesini sağlayabilirsiniz. Bunun için `inflect(text, object)` fonksiyonunu ilk parametreyi bir metin, ikinci parametreyi değerleri içeren bir obje vererek çağırabilirsiniz. Örnekler:
 
