@@ -8,9 +8,16 @@
   "description": "A library to inflect Turkish words",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "readme-en.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest",
-    "prepublish": "tsc"
+    "prepare": "tsc"
   },
   "keywords": [
     "Turkish",
