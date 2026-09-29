@@ -188,6 +188,40 @@ test('adding buffer letters', () => {
 	}
 })
 
+describe('possessive marker (--+)', () => {
+	test('uses n buffer after 3rd-person possessive stems', () => {
+		let list = [
+			['Giriş Kapısı--+e', 'Giriş Kapısına'],
+			['Giriş Kapısı--+de', 'Giriş Kapısında'],
+			['Giriş Kapısı--+den', 'Giriş Kapısından'],
+			['Giriş Kapısı--+i', 'Giriş Kapısını'],
+		];
+
+		for(let [source, target] of list) {
+			let result = inflect(source);
+			expect(result).toBe(target);
+		}
+	})
+
+	test('chains with further suffix markers', () => {
+		expect(inflect('Giriş Kapısı--+i--ler')).toBe('Giriş Kapısınılar');
+	})
+
+	test('does not change non-possessive buffer letters', () => {
+		let list = [
+			['kapı--e', 'kapıya'],
+			['araba--i', 'arabayı'],
+			['Giriş Kapısı--e', 'Giriş Kapısıya'],
+			['Giriş Kapısı--in', 'Giriş Kapısının'],
+		];
+
+		for(let [source, target] of list) {
+			let result = inflect(source);
+			expect(result).toBe(target);
+		}
+	})
+})
+
 test('adding buffer letters for numbers', () => {
 	let list = [
 		["12'--e", "12'ye"],
